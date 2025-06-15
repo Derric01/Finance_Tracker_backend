@@ -23,7 +23,11 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://finance-tracker-frontend-rho.vercel.app', 'https://finance-tracker-frontend-derric01.vercel.app'] 
+    : 'http://localhost:3000'
+}));
 
 // Import routes
 const authRoutes = require('./routes/auth');
